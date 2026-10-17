@@ -92,11 +92,11 @@ export default function PagoQR({
         <p className="mb-3 text-sm text-muted-foreground">
           Escanee el código con la aplicación de su banco. La página se actualiza sola cuando el pago se confirma.
         </p>
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
+        <div className="flex flex-col items-center gap-4 text-center">
           {pago.qr_url && (
-            <img src={pago.qr_url} alt="Código QR para pagar el aviso" className="size-56 rounded-lg border bg-white p-2" />
+            <img src={pago.qr_url} alt="Código QR para pagar el aviso" className="aspect-square w-full max-w-[380px] rounded-lg border bg-white p-2" />
           )}
-          <div className="flex flex-col gap-2 text-sm">
+          <div className="flex flex-col items-center gap-2 text-sm">
             <p>Monto: <b className="text-lg">{bs(pago.monto)}</b></p>
             {pago.codigo_recaudacion && <p>Código de recaudación: <b className="font-mono">{pago.codigo_recaudacion}</b></p>}
             <p className="flex items-center gap-2 text-muted-foreground">
