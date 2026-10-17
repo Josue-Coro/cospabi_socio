@@ -33,6 +33,13 @@ export function ProveedorSesion({ children }: { children: ReactNode }) {
       .finally(() => setCargando(false))
   }, [])
 
+  // Si la API responde 401 (token vencido) se vuelve al login
+  useEffect(() => {
+    const alExpirar = () => setSocio(null)
+    window.addEventListener("sesion-expirada", alExpirar)
+    return () => window.removeEventListener("sesion-expirada", alExpirar)
+  }, [])
+
   async function iniciarSesion(usuario: string, contrasena: string) {
     const respuesta = await api<{ access_token: string }>("/portal/login", {
       method: "POST",
