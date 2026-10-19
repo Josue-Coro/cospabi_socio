@@ -1,5 +1,5 @@
 import { NavLink, Navigate, Outlet } from "react-router-dom"
-import { FileTextIcon, LogOutIcon, ReceiptIcon } from "lucide-react"
+import { DropletsIcon, FileTextIcon, LogOutIcon, ReceiptIcon } from "lucide-react"
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
@@ -18,14 +18,17 @@ export default function Layout() {
   if (!socio) return <Navigate to="/login" replace />
 
   return (
-    <div className="min-h-svh bg-muted/40 print:bg-white">
-      <header className="border-b bg-background print:hidden">
+    <div className="min-h-svh bg-muted print:bg-white">
+      <header className="bg-primary text-primary-foreground print:hidden">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-2.5">
-          <div>
-            <p className="font-semibold text-primary">COSPABI R.L.</p>
-            <p className="text-xs text-muted-foreground">{socio.nombre_socio} · Cód. {socio.codigo_fijo}</p>
+          <div className="flex items-center gap-2">
+            <DropletsIcon className="size-6" />
+            <div>
+              <p className="font-semibold">COSPABI R.L.</p>
+              <p className="text-xs">{socio.nombre_socio} · Cód. {socio.codigo_fijo}</p>
+            </div>
           </div>
-          <Button variant="outline" size="sm" onClick={cerrarSesion}>
+          <Button variant="secondary" size="sm" onClick={cerrarSesion}>
             <LogOutIcon /> Salir
           </Button>
         </div>
@@ -37,8 +40,10 @@ export default function Layout() {
               end={item.ruta === "/"}
               className={({ isActive }) =>
                 cn(
-                  "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm hover:bg-muted",
-                  isActive && "bg-primary/10 font-medium text-primary",
+                  "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm",
+                  isActive
+                    ? "bg-background font-medium text-primary"
+                    : "hover:bg-secondary hover:text-secondary-foreground",
                 )
               }
             >
